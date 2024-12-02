@@ -1,19 +1,18 @@
 package org.firstinspires.ftc.teamcode.parts;
 
-import org.firstinspires.ftc.teamcode.Parts;
-
 public interface Arm {
-    public void pivot(int ticks);
-    public void extend(int ticks);
+    public void up(boolean move);
+    public void down(boolean move);
+    public void extend(double power);
+    public void retract(double power);
+
+    public void setArm(int ticks);
+    public void setSlide(int ticks);
+
+    public void armLims(int low, int high);
+    public void slideLims(int low, int high);
+
+    public void armGo();
+    public void slideGo();
 }
 
-class directGear implements Arm {
-    public void pivot(int ticks) {
-        Parts.setArm = ticks;
-        Parts.arm.setTargetPosition(ticks);
-    }
-    public void extend(int ticks) {
-        Parts.setSlide = ticks;
-        Parts.slide.setTargetPosition(ticks);
-    }
-}
