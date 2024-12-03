@@ -62,6 +62,8 @@ public class PartsBackUp {
         piv2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        claw = hardwareMap.get(Servo.class, "claw");
+
         // IMU
         imu = hardwareMap.get(IMU.class, "imu"); // Initializing IMU in Drivers Hub
         // Reconfiguring IMU orientation

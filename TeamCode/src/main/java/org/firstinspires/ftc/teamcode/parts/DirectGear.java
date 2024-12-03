@@ -92,6 +92,8 @@ public class DirectGear implements Arm {
         } else {
             PartsBackUp.piv1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             PartsBackUp.piv2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            PartsBackUp.piv1.setPower(0.5);
+            PartsBackUp.piv2.setPower(0.5);
         }
 
     }
@@ -100,6 +102,7 @@ public class DirectGear implements Arm {
         if (PartsBackUp.setSlide == 0) {
         } else {
             PartsBackUp.slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            PartsBackUp.slide.setPower(0.5);
         }
 
     }
