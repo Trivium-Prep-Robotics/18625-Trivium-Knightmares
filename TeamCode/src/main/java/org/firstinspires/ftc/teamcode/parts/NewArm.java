@@ -10,20 +10,26 @@ public class NewArm implements Arm{
         if (move) {
             Parts.inEncoderS = true;
             Parts.inEncoderA = false;
+
+            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero;
             Parts.arm.setPower(0.5);
+            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
+            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
+            Parts.slide.setTargetPosition(Parts.setSlide);
         }
-        Parts.setSlide = (int)((Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR);
-        Parts.slide.setTargetPosition(Parts.setSlide);
     }
 
     public void down(boolean move) {
         if (move) {
             Parts.inEncoderS = true;
             Parts.inEncoderA = false;
+
+            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero;
             Parts.arm.setPower(-0.5);
+            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
+            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
+            Parts.slide.setTargetPosition(Parts.setSlide);
         }
-        Parts.setSlide = (int)((Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR);
-        Parts.slide.setTargetPosition(Parts.setSlide);
     }
 
     public void extend(double power) {
@@ -41,7 +47,7 @@ public class NewArm implements Arm{
     }
 
     public void setArm(int ticks) {
-
+        
     }
 
     public void setSlide(int ticks) {

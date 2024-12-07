@@ -30,6 +30,9 @@ public class Parts {
     public static double pivTPR = 50 * ticksPerRev;
     public static double slideTPR = 2 * ticksPerRev;
 
+    public static double slideTicksZero = 0;
+    public static double slidePose = 0;
+
     public static boolean inEncoderS = true;
     public static boolean inEncoderA = true;
 

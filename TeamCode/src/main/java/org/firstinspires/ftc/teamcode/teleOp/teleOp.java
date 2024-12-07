@@ -30,8 +30,10 @@ public class teleOp extends LinearOpMode {
 
             drive.feildCentric(gamepad1);
 
+            // update every loop
             arm.armGo();
             arm.slideGo();
+
         }
 
     }
