@@ -59,7 +59,6 @@ public class Parts {
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         slide = hardwareMap.get(DcMotor.class, "slide");
-        slide.setDirection(DcMotorSimple.Direction.REVERSE);
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 

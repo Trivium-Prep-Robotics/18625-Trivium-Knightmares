@@ -3,15 +3,13 @@ package org.firstinspires.ftc.teamcode.parts;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Parts;
-import org.firstinspires.ftc.teamcode.PartsBackUp;
 
 public class NewArm implements Arm{
     public void up(boolean move) {
-        if (move) {
+        if (move && Parts.arm.getCurrentPosition() < Parts.armHigh) {
             Parts.inEncoderS = true;
             Parts.inEncoderA = false;
 
-            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero;
             Parts.arm.setPower(0.5);
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
@@ -20,11 +18,10 @@ public class NewArm implements Arm{
     }
 
     public void down(boolean move) {
-        if (move) {
+        if (move && Parts.arm.getCurrentPosition() > Parts.armLow) {
             Parts.inEncoderS = true;
             Parts.inEncoderA = false;
 
-            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero;
             Parts.arm.setPower(-0.5);
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
@@ -33,33 +30,62 @@ public class NewArm implements Arm{
     }
 
     public void extend(double power) {
-        if (power != 0) {
+        if (power != 0 && Parts.slidePose < Parts.slideHigh) {
             Parts.inEncoderS = false;
         }
-        PartsBackUp.slide.setPower(power * 0.5);
+        Parts.slide.setPower(-power * 0.5);
     }
 
     public void retract(double power) {
-        if (power != 0) {
+        if (power != 0 && Parts.slidePose > Parts.slideLow) {
             Parts.inEncoderS = false;
         }
-        PartsBackUp.slide.setPower(-power * 0.5);
+        Parts.slide.setPower(power * 0.5);
     }
 
     public void setArm(int ticks) {
-        
+        Parts.inEncoderA = true;
+
+        Parts.setArm = ticks;
+        Parts.arm.setTargetPosition(Parts.setArm);
     }
 
     public void setSlide(int ticks) {
+        Parts.inEncoderS = true;
+
+        Parts.setSlide = (int)(ticks + Parts.slideTicksZero);
+        Parts.slide.setTargetPosition(Parts.setSlide);
 
     }
 
     public void armLims(int low, int high) {
+        Parts.inEncoderA = true;
 
+        if (Parts.arm.getCurrentPosition() <= low) {
+            Parts.setArm = low;
+        } else if (Parts.arm.getCurrentPosition() >= high) {
+            Parts.setArm = high;
+        } else {
+            Parts.inEncoderA = false;
+        }
+
+        Parts.armLow = low;
+        Parts.armHigh = high;
     }
 
     public void slideLims(int low, int high) {
+        Parts.inEncoderA = true;
 
+        if (Parts.slidePose <= low) {
+            Parts.setSlide = low;
+        } else if (Parts.slidePose >= high) {
+            Parts.setSlide = high;
+        } else {
+            Parts.inEncoderA = false;
+        }
+
+        Parts.slideLow = low;
+        Parts.slideHigh = high;
     }
 
     public void armGo() {

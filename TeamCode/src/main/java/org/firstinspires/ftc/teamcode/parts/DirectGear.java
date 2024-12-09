@@ -75,11 +75,7 @@ public class DirectGear implements Arm {
     }
 
     public void slideLims(int low, int high) {
-        if (PartsBackUp.slide.getCurrentPosition() <= low || PartsBackUp.slide.getCurrentPosition() <= low) {
-            PartsBackUp.slide.setPower(0);
-        }
-
-        if (PartsBackUp.slide.getCurrentPosition() >= high || PartsBackUp.slide.getCurrentPosition() >= high) {
+        if (PartsBackUp.slide.getCurrentPosition() <= low || PartsBackUp.slide.getCurrentPosition() >= high) {
             PartsBackUp.slide.setPower(0);
         }
 
