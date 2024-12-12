@@ -10,7 +10,9 @@ public class NewArm implements Arm{
             Parts.inEncoderS = true;
             Parts.inEncoderA = false;
 
-            Parts.arm.setPower(0.5);
+            Parts.arm.setPower(1);
+
+
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
             Parts.slide.setTargetPosition(Parts.setSlide);
@@ -22,7 +24,7 @@ public class NewArm implements Arm{
             Parts.inEncoderS = true;
             Parts.inEncoderA = false;
 
-            Parts.arm.setPower(-0.5);
+            Parts.arm.setPower(-1);
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
             Parts.slide.setTargetPosition(Parts.setSlide);
@@ -91,7 +93,7 @@ public class NewArm implements Arm{
     public void armGo() {
         if (Parts.inEncoderA) {
             Parts.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Parts.arm.setPower(0.5);
+            Parts.arm.setPower(1);
         }
     }
 
