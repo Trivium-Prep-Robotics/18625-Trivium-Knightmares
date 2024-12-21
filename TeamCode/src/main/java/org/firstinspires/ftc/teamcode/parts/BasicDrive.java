@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.parts;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.PartsBackUp;
+import org.firstinspires.ftc.teamcode.Parts;
 
 public class BasicDrive implements Drive {
     public void moveRobot(double x, double y, double yaw) {
@@ -26,14 +26,14 @@ public class BasicDrive implements Drive {
         }
 
         // Send powers to the wheels.
-        PartsBackUp.FL.setPower(leftFrontPower);
-        PartsBackUp.FR.setPower(rightFrontPower);
-        PartsBackUp.BL.setPower(leftBackPower);
-        PartsBackUp.BR.setPower(rightBackPower);
+        Parts.FL.setPower(leftFrontPower);
+        Parts.FR.setPower(rightFrontPower);
+        Parts.BL.setPower(leftBackPower);
+        Parts.BR.setPower(rightBackPower);
     }
 
     public void feildCentric(Gamepad gamepad) {
-        double botHeading = PartsBackUp.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        double botHeading = Parts.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
         double vertical = -gamepad.left_stick_y * 1;
         double horizontal = gamepad.left_stick_x * 1;
@@ -51,9 +51,9 @@ public class BasicDrive implements Drive {
         double newHorizontal = horizontal * Math.cos(-botHeading) - vertical * Math.sin(-botHeading);
 
         // Setting Field Centric Drive
-        PartsBackUp.FL.setPower((newVertical + newHorizontal + pivot) / denominator);
-        PartsBackUp.FR.setPower((newVertical - newHorizontal - pivot) / denominator);
-        PartsBackUp.BL.setPower((newVertical - newHorizontal + pivot) / denominator);
-        PartsBackUp.BR.setPower((newVertical + newHorizontal - pivot) / denominator);
+        Parts.FL.setPower((newVertical + newHorizontal + pivot) / denominator);
+        Parts.FR.setPower((newVertical - newHorizontal - pivot) / denominator);
+        Parts.BL.setPower((newVertical - newHorizontal + pivot) / denominator);
+        Parts.BR.setPower((newVertical + newHorizontal - pivot) / denominator);
     }
 }

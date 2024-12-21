@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.parts.GearClaw;
 
 @TeleOp (name = "Direct Gear Bot")
 @Disabled
+
 public class BackUpBot extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         PartsBackUp robot = new PartsBackUp(hardwareMap);
@@ -29,7 +30,7 @@ public class BackUpBot extends LinearOpMode {
 
             arm.up(gamepad2.dpad_up);
             arm.down(gamepad2.dpad_down);
-            arm.extend(gamepad2.right_trigger);
+//            arm.extend(gamepad2.right_trigger);
             arm.retract(gamepad2.left_trigger);
 
             claw.grabs(gamepad2.right_bumper);

@@ -33,8 +33,8 @@ public class Parts {
     public static double slideTicksZero = 0;
     public static double slidePose = 0;
 
-    public static boolean inEncoderS = true;
-    public static boolean inEncoderA = true;
+    public static boolean inEncoderS = false;
+    public static boolean inEncoderA = false;
 
     public Parts(HardwareMap hardwareMap) {
 
@@ -57,9 +57,12 @@ public class Parts {
         arm = hardwareMap.get(DcMotor.class, "arm");
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         slide = hardwareMap.get(DcMotor.class, "slide");
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         // reverse
@@ -67,6 +70,8 @@ public class Parts {
         // when setPower(0) -> motors brake
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        claw = hardwareMap.get(Servo.class, "claw");
 
         // IMU
         imu = hardwareMap.get(IMU.class, "imu"); // Initializing IMU in Drivers Hub

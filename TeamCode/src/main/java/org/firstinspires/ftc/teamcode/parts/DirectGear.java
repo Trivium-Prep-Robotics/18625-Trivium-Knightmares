@@ -30,9 +30,9 @@ public class DirectGear implements Arm {
         }
     }
 
-    public void extend(double power) {
+    public void extend(boolean power) {
         if (PartsBackUp.slide.getCurrentPosition() < PartsBackUp.slideHigh) {
-            PartsBackUp.slide.setPower(power * 0.5);
+//            PartsBackUp.slide.setPower(power * 0.5);
         } else {
             PartsBackUp.slide.setPower(0);
         }

@@ -15,7 +15,6 @@ public class NewArm implements Arm{
 
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
-            Parts.slide.setTargetPosition(Parts.setSlide);
         }
     }
 
@@ -27,36 +26,37 @@ public class NewArm implements Arm{
             Parts.arm.setPower(-1);
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
-            Parts.slide.setTargetPosition(Parts.setSlide);
         }
     }
 
-    public void extend(double power) {
-        if (power != 0 && Parts.slidePose < Parts.slideHigh) {
+    public void extend(boolean power) {
+        if (power/* && Parts.slidePose < Parts.slideHigh*/) {
             Parts.inEncoderS = false;
+            Parts.slide.setPower(1);
+        } else {
+            Parts.slide.setPower(0);
         }
-        Parts.slide.setPower(-power * 0.5);
     }
 
     public void retract(double power) {
-        if (power != 0 && Parts.slidePose > Parts.slideLow) {
+        if (power != 0/* && Parts.slidePose > Parts.slideLow*/) {
             Parts.inEncoderS = false;
+            Parts.slide.setPower(-1);
+        } else {
+            Parts.slide.setPower(0);
         }
-        Parts.slide.setPower(power * 0.5);
     }
 
     public void setArm(int ticks) {
         Parts.inEncoderA = true;
 
         Parts.setArm = ticks;
-        Parts.arm.setTargetPosition(Parts.setArm);
     }
 
     public void setSlide(int ticks) {
         Parts.inEncoderS = true;
 
         Parts.setSlide = (int)(ticks + Parts.slideTicksZero);
-        Parts.slide.setTargetPosition(Parts.setSlide);
 
     }
 
@@ -92,6 +92,7 @@ public class NewArm implements Arm{
 
     public void armGo() {
         if (Parts.inEncoderA) {
+            Parts.arm.setTargetPosition(Parts.setSlide);
             Parts.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             Parts.arm.setPower(1);
         }
@@ -99,8 +100,9 @@ public class NewArm implements Arm{
 
     public void slideGo() {
         if (Parts.inEncoderS) {
+            Parts.slide.setTargetPosition(Parts.setSlide);
             Parts.slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Parts.slide.setPower(0.5);
+            Parts.slide.setPower(1);
         }
     }
 }

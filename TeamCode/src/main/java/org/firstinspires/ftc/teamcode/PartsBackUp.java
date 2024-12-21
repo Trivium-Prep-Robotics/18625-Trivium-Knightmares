@@ -45,14 +45,14 @@ public class PartsBackUp {
 
         piv1 = hardwareMap.get(DcMotor.class, "pivot 1");
         piv2 = hardwareMap.get(DcMotor.class, "pivot 2");
-        piv1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        piv2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        piv1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        piv2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // reverse left
         piv2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         slide = hardwareMap.get(DcMotor.class, "slide");
-        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         // reverse
