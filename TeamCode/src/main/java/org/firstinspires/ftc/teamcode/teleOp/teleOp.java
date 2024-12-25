@@ -33,6 +33,7 @@ public class teleOp extends LinearOpMode {
         while (opModeIsActive()) {
             Parts.slide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             Parts.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
             // update each loop
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
             Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero;
@@ -42,21 +43,33 @@ public class teleOp extends LinearOpMode {
 
 //            arm.up(gamepad2.dpad_up);
 //            arm.down(gamepad2.dpad_down);
-            arm.extend(gamepad2.left_bumper);
-            arm.retract(gamepad2.left_trigger);
+//            arm.armStop(!(gamepad2.dpad_up || gamepad2.dpad_down));
+
+//            arm.extend(gamepad2.right_trigger);
+//            arm.retract(gamepad2.left_trigger);
+//            arm.slideStop((gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0));
 
 //            claw.grabs(gamepad2.right_bumper);
 //            claw.drops(gamepad2.left_bumper);
 
 //            drive.feildCentric(gamepad1);
 
+            /*if (gamepad2.dpad_up) {
+                Parts.arm.setPower(1);
+            } else if (gamepad2.dpad_down) {
+                Parts.arm.setPower(-1);
+            } else {
+                Parts.arm.setPower(0);
+            }*/
+
+
             // update every loop
             telemetry.addLine("arm:" + Parts.arm.getCurrentPosition());
             telemetry.addLine("slide:" + Parts.slide.getCurrentPosition());
             telemetry.update();
 
-            arm.armGo();
-            arm.slideGo();
+//            arm.armGo();
+//            arm.slideGo();
 
         }
 

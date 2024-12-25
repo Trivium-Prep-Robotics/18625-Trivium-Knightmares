@@ -6,35 +6,39 @@ import org.firstinspires.ftc.teamcode.Parts;
 
 public class NewArm implements Arm{
     public void up(boolean move) {
-        if (move && Parts.arm.getCurrentPosition() < Parts.armHigh) {
-            Parts.inEncoderS = true;
-            Parts.inEncoderA = false;
+        if (move/* && Parts.arm.getCurrentPosition() < Parts.armHigh*/) {
+//            Parts.inEncoderS = true;
+//            Parts.inEncoderA = false;
 
             Parts.arm.setPower(1);
 
-
-            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
+//            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
+//            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
         }
     }
 
     public void down(boolean move) {
-        if (move && Parts.arm.getCurrentPosition() > Parts.armLow) {
-            Parts.inEncoderS = true;
-            Parts.inEncoderA = false;
+        if (move/* && Parts.arm.getCurrentPosition() > Parts.armLow*/) {
+//            Parts.inEncoderS = true;
+//            Parts.inEncoderA = false;
 
             Parts.arm.setPower(-1);
-            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
+
+//            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
+//            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
         }
     }
 
-    public void extend(boolean power) {
-        if (power/* && Parts.slidePose < Parts.slideHigh*/) {
+    public void armStop(boolean stop) {
+        if (stop) {
+            Parts.arm.setPower(0);
+        }
+    }
+
+    public void extend(double power) {
+        if (power != 0/* && Parts.slidePose < Parts.slideHigh*/) {
             Parts.inEncoderS = false;
             Parts.slide.setPower(1);
-        } else {
-            Parts.slide.setPower(0);
         }
     }
 
@@ -42,7 +46,11 @@ public class NewArm implements Arm{
         if (power != 0/* && Parts.slidePose > Parts.slideLow*/) {
             Parts.inEncoderS = false;
             Parts.slide.setPower(-1);
-        } else {
+        }
+    }
+
+    public void slideStop(boolean stop) {
+        if (stop) {
             Parts.slide.setPower(0);
         }
     }
