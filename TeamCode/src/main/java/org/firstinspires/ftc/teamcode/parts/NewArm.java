@@ -7,25 +7,25 @@ import org.firstinspires.ftc.teamcode.Parts;
 public class NewArm implements Arm{
     public void up(boolean move) {
         if (move/* && Parts.arm.getCurrentPosition() < Parts.armHigh*/) {
-//            Parts.inEncoderS = true;
-//            Parts.inEncoderA = false;
+            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR/* - Parts.slideTicksZero*/);
+            Parts.inEncoderA = false;
 
             Parts.arm.setPower(1);
 
-//            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-//            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
+            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
+            setSlide((int)(Parts.slidePose));
         }
     }
 
     public void down(boolean move) {
         if (move/* && Parts.arm.getCurrentPosition() > Parts.armLow*/) {
-//            Parts.inEncoderS = true;
-//            Parts.inEncoderA = false;
+            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR/* - Parts.slideTicksZero*/);
+            Parts.inEncoderA = false;
 
             Parts.arm.setPower(-1);
 
-//            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-//            Parts.setSlide = (int)(Parts.slidePose + Parts.slideTicksZero);
+            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
+            setSlide((int)(Parts.slidePose));
         }
     }
 
@@ -104,6 +104,7 @@ public class NewArm implements Arm{
             Parts.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             Parts.arm.setPower(1);
         }
+
     }
 
     public void slideGo() {
@@ -111,6 +112,9 @@ public class NewArm implements Arm{
             Parts.slide.setTargetPosition(Parts.setSlide);
             Parts.slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             Parts.slide.setPower(1);
+            if (Parts.slide.getCurrentPosition() > Parts.setSlide - 1 || Parts.slide.getCurrentPosition() < Parts.setSlide + 1) {
+                Parts.inEncoderS = false;
+            }
         }
     }
 }

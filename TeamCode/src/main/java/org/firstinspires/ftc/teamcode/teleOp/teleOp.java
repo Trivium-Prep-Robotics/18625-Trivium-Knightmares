@@ -36,18 +36,17 @@ public class teleOp extends LinearOpMode {
 
             // update each loop
             Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero;
 
             /*arm.armLims(pivLow, pivTop);
             arm.slideLims(slideLow, slideTop);*/
 
-//            arm.up(gamepad2.dpad_up);
-//            arm.down(gamepad2.dpad_down);
-//            arm.armStop(!(gamepad2.dpad_up || gamepad2.dpad_down));
+            arm.up(gamepad2.dpad_up);
+            arm.down(gamepad2.dpad_down);
+            arm.armStop(!(gamepad2.dpad_up || gamepad2.dpad_down));
 
-//            arm.extend(gamepad2.right_trigger);
-//            arm.retract(gamepad2.left_trigger);
-//            arm.slideStop((gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0));
+            arm.extend(gamepad2.right_trigger);
+            arm.retract(gamepad2.left_trigger);
+            arm.slideStop((gamepad2.left_trigger == 0 && gamepad2.right_trigger == 0));
 
 //            claw.grabs(gamepad2.right_bumper);
 //            claw.drops(gamepad2.left_bumper);
@@ -66,10 +65,12 @@ public class teleOp extends LinearOpMode {
             // update every loop
             telemetry.addLine("arm:" + Parts.arm.getCurrentPosition());
             telemetry.addLine("slide:" + Parts.slide.getCurrentPosition());
+            telemetry.addLine("slidePos:" + Parts.slidePose);
+            telemetry.addLine("slide zero:" + Parts.slideTicksZero);
             telemetry.update();
 
-//            arm.armGo();
-//            arm.slideGo();
+            arm.armGo();
+            arm.slideGo();
 
         }
 

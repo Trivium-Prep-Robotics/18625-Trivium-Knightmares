@@ -27,7 +27,7 @@ public class Parts {
     public static int setSlide = 0;
 
     public static double ticksPerRev = 5281.1;
-    public static double pivTPR = 50 * ticksPerRev;
+    public static double pivTPR = 10 * ticksPerRev;
     public static double slideTPR = 2 * ticksPerRev;
 
     public static double slideTicksZero = 0;
