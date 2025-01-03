@@ -6,26 +6,16 @@ import org.firstinspires.ftc.teamcode.Parts;
 
 public class NewArm implements Arm{
     public void up(boolean move) {
-        if (move/* && Parts.arm.getCurrentPosition() < Parts.armHigh*/) {
-            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR/* - Parts.slideTicksZero*/);
-            Parts.inEncoderA = false;
-
-            Parts.arm.setPower(1);
-
-            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-            setSlide((int)(Parts.slidePose));
+        if (move) {
+           Parts.arm.setPower(1);
+           Parts.slide.setPower(0.4);
         }
     }
 
     public void down(boolean move) {
-        if (move/* && Parts.arm.getCurrentPosition() > Parts.armLow*/) {
-            Parts.slidePose = (Parts.slide.getCurrentPosition() / Parts.slideTPR/* - Parts.slideTicksZero*/);
-            Parts.inEncoderA = false;
-
+        if (move) {
             Parts.arm.setPower(-1);
-
-            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-            setSlide((int)(Parts.slidePose));
+            Parts.slide.setPower(-0.4);
         }
     }
 
@@ -38,14 +28,14 @@ public class NewArm implements Arm{
     public void extend(double power) {
         if (power != 0/* && Parts.slidePose < Parts.slideHigh*/) {
             Parts.inEncoderS = false;
-            Parts.slide.setPower(1);
+            Parts.slide.setPower(-1);
         }
     }
 
     public void retract(double power) {
         if (power != 0/* && Parts.slidePose > Parts.slideLow*/) {
             Parts.inEncoderS = false;
-            Parts.slide.setPower(-1);
+            Parts.slide.setPower(1);
         }
     }
 
@@ -64,7 +54,7 @@ public class NewArm implements Arm{
     public void setSlide(int ticks) {
         Parts.inEncoderS = true;
 
-        Parts.setSlide = (int)(ticks + Parts.slideTicksZero);
+        Parts.setSlide = (int)(ticks);
 
     }
 

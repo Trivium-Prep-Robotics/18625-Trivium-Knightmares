@@ -64,9 +64,6 @@ public class Parts {
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
-        // reverse
-        slide.setDirection(DcMotorSimple.Direction.REVERSE);
         // when setPower(0) -> motors brake
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
