@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.Parts;
 import org.firstinspires.ftc.teamcode.parts.BasicDrive;
@@ -11,13 +12,13 @@ import org.firstinspires.ftc.teamcode.parts.NewArm;
 
 @TeleOp (name = "teleOp", group = "TELEOP")
 public class teleOp extends LinearOpMode {
-    int pivTop = (int)(Parts.pivTPR * 0.25);
-    int pivLow = (int)(Parts.pivTPR * 0.00);
 
-    int slideTop = (int)(Parts.slideTPR * 4000);
-    int slideLow = (int)(Parts.slideTPR * 0.00);
 
     public void runOpMode() throws InterruptedException {
+
+        Gamepad currentGamepad2 = new Gamepad();
+
+        Gamepad previousGamepad2 = new Gamepad();
 
         Parts robot = new Parts(hardwareMap);
         NewArm arm = new NewArm();
@@ -31,16 +32,25 @@ public class teleOp extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            Parts.slide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Parts.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            previousGamepad2.copy(currentGamepad2);
+            currentGamepad2.copy(gamepad2);
 
             // update each loop
-//            Parts.slideTicksZero = (Parts.arm.getCurrentPosition() / Parts.pivTPR) * Parts.slideTPR;
-//            Parts.slidePose = ((Parts.slide.getCurrentPosition() / Parts.slideTPR) - Parts.slideTicksZero);
-//            Parts.slidePose = 0;
+            Parts.slideTicksZero = Parts.arm.getCurrentPosition() * 0.4;
+            Parts.slidePose = (Parts.slide.getCurrentPosition() - Parts.slideTicksZero);
 
-            /*arm.armLims(pivLow, pivTop);
-            arm.slideLims(slideLow, slideTop);*/
+            if (Parts.lims) {
+//              arm.armLims();
+//              arm.slideLims(slideLow, slideTop);
+            }
+
+            if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
+                if (Parts.lims) {
+                    Parts.lims = false;
+                } else {
+                    Parts.lims = true;
+                }
+            }
 
             arm.up(gamepad2.dpad_up);
             arm.down(gamepad2.dpad_down);
@@ -64,7 +74,7 @@ public class teleOp extends LinearOpMode {
             telemetry.update();
 
 //            arm.armGo();
-            arm.slideGo();
+//            arm.slideGo();
 
         }
 

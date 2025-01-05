@@ -17,24 +17,24 @@ public class Parts {
 
     public static IMU imu;
     IMU.Parameters myIMUparameters;
-
-    public static int armLow;
-    public static int armHigh;
-    public static int slideLow;
-    public static int slideHigh;
+    public static double ticksPerRev = 5281.1;
+    public static double pivTPR = 5 * ticksPerRev;
+    public static double slideTPR = 2 * ticksPerRev;
+    public static int armLow = (int)(Parts.pivTPR * 0.00);;
+    public static int armHigh = (int)(Parts.pivTPR * 0.25);
+    public static int slideLow = (int)(Parts.slideTPR * 0.00);
+    public static int slideHigh = -56000;
 
     public static int setArm = 0;
     public static int setSlide = 0;
 
-    public static double ticksPerRev = 5281.1;
-    public static double pivTPR = 10 * ticksPerRev;
-    public static double slideTPR = 2 * ticksPerRev;
 
     public static double slideTicksZero = 0;
     public static double slidePose = 0;
 
     public static boolean inEncoderS = false;
     public static boolean inEncoderA = false;
+    public static boolean lims = false;
 
     public Parts(HardwareMap hardwareMap) {
 

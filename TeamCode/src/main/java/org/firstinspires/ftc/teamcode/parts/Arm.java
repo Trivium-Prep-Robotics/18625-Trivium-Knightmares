@@ -11,8 +11,8 @@ public interface Arm {
     public void setArm(int ticks);
     public void setSlide(int ticks);
 
-    public void armLims(int low, int high);
-    public void slideLims(int low, int high);
+    public void armLims();
+    public void slideLims();
 
     public void armGo();
     public void slideGo();

@@ -62,8 +62,8 @@ public class DirectGear implements Arm {
         PartsBackUp.slide.setTargetPosition(PartsBackUp.setSlide);
     }
 
-    public void armLims(int low, int high) {
-        if (PartsBackUp.piv2.getCurrentPosition() <= low || PartsBackUp.piv1.getCurrentPosition() <= low) {
+    public void armLims() {
+        /*if (PartsBackUp.piv2.getCurrentPosition() <= low || PartsBackUp.piv1.getCurrentPosition() <= low) {
             PartsBackUp.piv1.setPower(0);
             PartsBackUp.piv2.setPower(0);
         }
@@ -74,16 +74,16 @@ public class DirectGear implements Arm {
         }
 
         PartsBackUp.armLow = low;
-        PartsBackUp.armHigh = high;
+        PartsBackUp.armHigh = high;*/
     }
 
-    public void slideLims(int low, int high) {
-        if (PartsBackUp.slide.getCurrentPosition() <= low || PartsBackUp.slide.getCurrentPosition() >= high) {
+    public void slideLims() {
+        /*if (PartsBackUp.slide.getCurrentPosition() <= low || PartsBackUp.slide.getCurrentPosition() >= high) {
             PartsBackUp.slide.setPower(0);
         }
 
         PartsBackUp.slideLow = low;
-        PartsBackUp.slideHigh = high;
+        PartsBackUp.slideHigh = high;*/
     }
 
     public void armGo() {

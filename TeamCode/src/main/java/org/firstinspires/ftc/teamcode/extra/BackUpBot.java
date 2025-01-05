@@ -25,8 +25,8 @@ public class BackUpBot extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            arm.armLims(0, (int)(3895.9 * 0.25));
-            arm.slideLims(0, 4000);
+            arm.armLims();
+            arm.slideLims();
 
             arm.up(gamepad2.dpad_up);
             arm.down(gamepad2.dpad_down);
