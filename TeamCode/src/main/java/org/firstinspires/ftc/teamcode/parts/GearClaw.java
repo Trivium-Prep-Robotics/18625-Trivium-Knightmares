@@ -14,4 +14,11 @@ public class GearClaw implements Claw {
             Parts.claw.setPosition(0.4);
         }
     }
+    public void grabs() {
+        Parts.claw.setPosition(0.7);
+    }
+
+    public void drops() {
+        Parts.claw.setPosition(0.4);
+    }
 }

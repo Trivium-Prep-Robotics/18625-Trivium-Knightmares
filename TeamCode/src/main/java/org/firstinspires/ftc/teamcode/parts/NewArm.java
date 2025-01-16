@@ -8,21 +8,37 @@ public class NewArm implements Arm{
     public void up(boolean move) {
         if (move && !Parts.lims) {
             Parts.arm.setPower(1);
-            Parts.slide.setPower(0.4);
+            Parts.slide.setPower(0.1);
         } else if (move && (Parts.arm.getCurrentPosition() < Parts.armHigh || Parts.arm.getCurrentPosition() == 0)) {
             Parts.arm.setPower(1);
-            Parts.slide.setPower(0.4);
+            Parts.slide.setPower(0.1);
         }
+    }
+
+    public void up(int sec) throws InterruptedException{
+        Parts.arm.setPower(1);
+        Parts.slide.setPower(0.1);
+        Thread.sleep(sec);
+        Parts.arm.setPower(0);
+        Parts.slide.setPower(0);
     }
 
     public void down(boolean move) {
         if (move && !Parts.lims) {
             Parts.arm.setPower(-1);
-            Parts.slide.setPower(-0.4);
+            Parts.slide.setPower(-0.1);
         } else if (move && Parts.arm.getCurrentPosition() > Parts.armLow) {
             Parts.arm.setPower(-1);
-            Parts.slide.setPower(-0.4);
+            Parts.slide.setPower(-0.1);
         }
+    }
+
+    public void down(int sec) throws InterruptedException{
+        Parts.arm.setPower(-1);
+        Parts.slide.setPower(-0.1);
+        Thread.sleep(sec);
+        Parts.arm.setPower(0);
+        Parts.slide.setPower(0);
     }
 
     public void armStop(boolean stop) {
@@ -32,17 +48,35 @@ public class NewArm implements Arm{
     }
 
     public void extend(double power) {
-        if (power != 0/* && Parts.slidePose < Parts.slideHigh*/) {
+        if (power != 0 && !Parts.lims) {
+            Parts.inEncoderS = false;
+            Parts.slide.setPower(-1);
+        } else if (power != 0 && (Parts.slidePose > Parts.slideLow || Parts.slidePose == 0)) {
             Parts.inEncoderS = false;
             Parts.slide.setPower(-1);
         }
     }
 
+    public void extend(int sec) throws InterruptedException{
+        Parts.slide.setPower(-1);
+        Thread.sleep(sec);
+        Parts.slide.setPower(0);
+    }
+
     public void retract(double power) {
-        if (power != 0/* && Parts.slidePose > Parts.slideLow*/) {
+        if (power != 0 && !Parts.lims) {
+            Parts.inEncoderS = false;
+            Parts.slide.setPower(1);
+        } else if (power != 0 && Parts.slidePose < Parts.slideHigh) {
             Parts.inEncoderS = false;
             Parts.slide.setPower(1);
         }
+    }
+
+    public void retract(int sec) throws InterruptedException{
+        Parts.slide.setPower(1);
+        Thread.sleep(sec);
+        Parts.slide.setPower(0);
     }
 
     public void slideStop(boolean stop) {

@@ -36,13 +36,8 @@ public class teleOp extends LinearOpMode {
             currentGamepad2.copy(gamepad2);
 
             // update each loop
-            Parts.slideTicksZero = Parts.arm.getCurrentPosition() * 0.4;
+            Parts.slideTicksZero = Parts.arm.getCurrentPosition() * 0.1;
             Parts.slidePose = (Parts.slide.getCurrentPosition() - Parts.slideTicksZero);
-
-            if (Parts.lims) {
-//              arm.armLims();
-//              arm.slideLims(slideLow, slideTop);
-            }
 
             if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
                 if (Parts.lims) {
@@ -63,7 +58,7 @@ public class teleOp extends LinearOpMode {
             claw.grabs(gamepad2.right_bumper);
             claw.drops(gamepad2.left_bumper);
 
-//            drive.feildCentric(gamepad1);
+            drive.feildCentric(gamepad1);
 
 
             // update every loop

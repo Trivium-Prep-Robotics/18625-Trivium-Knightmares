@@ -28,7 +28,7 @@ public class Lefto extends LinearOpMode {
 
         claw = hardwareMap.get(Servo.class, "claw");
 
-        claw.setPosition(0.63);
+        claw.setPosition(0.7);
 
         waitForStart();
 

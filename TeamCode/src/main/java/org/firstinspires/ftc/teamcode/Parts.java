@@ -22,8 +22,8 @@ public class Parts {
     public static double slideTPR = 2 * ticksPerRev;
     public static int armLow = (int)(Parts.pivTPR * 0.00);;
     public static int armHigh = (int)(Parts.pivTPR * 0.25);
-    public static int slideLow = (int)(Parts.slideTPR * 0.00);
-    public static int slideHigh = -56000;
+    public static int slideHigh = (int)(Parts.slideTPR * 0.00);
+    public static int slideLow = -56000;
 
     public static int setArm = 0;
     public static int setSlide = 0;
