@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.parts;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.Parts;
 import org.firstinspires.ftc.teamcode.PartsBackUp;
 
 public class DirectGear implements Arm {
@@ -17,6 +18,8 @@ public class DirectGear implements Arm {
             PartsBackUp.piv2.setPower(0);
         }
     }
+    public void up(int sec) throws InterruptedException{
+    }
 
     public void down(boolean move) {
         boolean inLims = PartsBackUp.piv1.getCurrentPosition() > PartsBackUp.armLow && PartsBackUp.piv1.getCurrentPosition() > PartsBackUp.armLow;
@@ -30,6 +33,9 @@ public class DirectGear implements Arm {
         }
     }
 
+    public void down(int sec) throws InterruptedException{
+    }
+
     public void extend(double power) {
         if (PartsBackUp.slide.getCurrentPosition() < PartsBackUp.slideHigh) {
             PartsBackUp.slide.setPower(power * 0.5);
@@ -37,6 +43,8 @@ public class DirectGear implements Arm {
             PartsBackUp.slide.setPower(0);
         }
 
+    }
+    public void extend(int sec) throws InterruptedException{
     }
 
     public void retract(double power) {
@@ -46,6 +54,9 @@ public class DirectGear implements Arm {
             PartsBackUp.slide.setPower(0);
         }
 
+    }
+
+    public void retract(int sec) throws InterruptedException{
     }
 
     public void slideStop(boolean stop) {}

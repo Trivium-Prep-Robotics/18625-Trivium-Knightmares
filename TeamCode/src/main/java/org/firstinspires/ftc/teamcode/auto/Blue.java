@@ -20,17 +20,29 @@ public class Blue extends LinearOpMode {
 
         waitForStart();
 
-        arm.up(500);
-        arm.extend(500);
+        arm.up(2000);
+        arm.extend(1200);
 
         drive.moveRobot(0.5, 0, 0);
-        sleep(500);
+        sleep(2000);
         drive.moveRobot(0, 0, 0);
-        arm.down(100);
+        arm.down(500);
+
 
         claw.drops();
 
         sleep(1000);
+
+        drive.moveRobot(-0.5, 0, 0);
+        sleep(2000);
+        drive.moveRobot(0, -0.5, 0);
+        sleep(2500);
+        drive.moveRobot(-0.25, 0, 0);
+        sleep(500);
+        drive.moveRobot(0, 0, 0);
+
+        arm.retract(1200);
+        arm.down(1500);
 
         
     }
