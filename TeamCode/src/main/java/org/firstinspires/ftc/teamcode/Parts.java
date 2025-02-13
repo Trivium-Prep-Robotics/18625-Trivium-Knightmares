@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 
+@Config
 public class Parts {
 
     // declaring parts
@@ -51,6 +53,11 @@ public class Parts {
     public static double sample;
     public static double specimen;
 
+    public static double kP = 0.1;
+    public static double kI = 0.01;
+    public static double kD = 0.01;
+
+
     public Parts(HardwareMap hardwareMap) {
 
         // assigning drive train motors
@@ -78,8 +85,8 @@ public class Parts {
         piv1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         piv2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        piv1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        piv2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        piv1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        piv2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // assigning slides
         slide = hardwareMap.get(DcMotor.class, "slide");
