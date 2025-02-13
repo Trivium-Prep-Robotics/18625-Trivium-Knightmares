@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
 public class Parts {
@@ -56,6 +57,9 @@ public class Parts {
     public static double kP = 0.1;
     public static double kI = 0.01;
     public static double kD = 0.01;
+    public static double integralSum = 0;
+    public static ElapsedTime timer = new ElapsedTime();
+    public static double lastError = 0;
 
 
     public Parts(HardwareMap hardwareMap) {

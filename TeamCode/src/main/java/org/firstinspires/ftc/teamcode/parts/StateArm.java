@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.parts;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Parts;
@@ -104,12 +106,12 @@ public class StateArm implements Arm {
 
     /* setting the arm ticks */
     public void setArm(int ticks) {
-
+        Parts.setArm = ticks * (int)(Parts.pivTPR);
     }
 
     /* setting the slide ticks */
     public void setSlide(int ticks) {
-
+        Parts.setSlide = ticks * (int)(Parts.slideTPR);
     }
 
     /* limit methods for the arm and extention */
@@ -123,8 +125,33 @@ public class StateArm implements Arm {
 
     /* methods to start encoders */
     public void armGo() {
+        // Get the current position of the motor
+        double currentPosition = Parts.piv1.getCurrentPosition();
 
+        // Calculate the error between the target and current position
+        double error = Parts.setArm - currentPosition;
 
+        // Calculate the integral sum and derivative
+        Parts.integralSum += error * Parts.timer.seconds();
+        double derivative = (error - Parts.lastError) / Parts.timer.seconds();
+
+        // Calculate the output power using PID formula
+        double output = Parts.kP * error + Parts.kI * Parts.integralSum + Parts.kD * derivative;
+
+        // Set the motor power
+        Parts.piv1.setPower(output);
+        Parts.piv2.setPower(output);
+        Parts.slide.setPower(output * Parts.armToExtend);
+
+        // Update the last error and reset the timer
+        Parts.lastError = error;
+        Parts.timer.reset();
+
+        // Send telemetry data to the driver station
+        telemetry.addData("Target Position", Parts.setArm);
+        telemetry.addData("Current Position", currentPosition);
+        telemetry.addData("Error", error);
+        telemetry.addData("Output", output);
     }
 
 

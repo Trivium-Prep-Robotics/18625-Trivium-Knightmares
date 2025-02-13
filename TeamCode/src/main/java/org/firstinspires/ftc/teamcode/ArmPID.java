@@ -48,6 +48,7 @@ public class ArmPID extends LinearOpMode {
             // Set the motor power
             Parts.piv1.setPower(output);
             Parts.piv2.setPower(output);
+            Parts.slide.setPower(output * Parts.armToExtend);
 
             // Update the last error and reset the timer
             lastError = error;
