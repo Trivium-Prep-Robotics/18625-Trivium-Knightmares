@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Parts;
 
-public class StateArm implements Arm{
+public class StateArm implements Arm {
     /* Set the arm power used */
     public void armPower(double power) {
         Parts.armPower = power;
@@ -24,7 +24,7 @@ public class StateArm implements Arm{
         }
     }
 
-    public void up(int sec) throws InterruptedException{
+    public void up(int sec) throws InterruptedException {
         Parts.piv1.setPower(Parts.armPower);
         Parts.piv2.setPower(Parts.armPower);
         Parts.slide.setPower(Parts.armPower * Parts.armToExtend);
@@ -43,7 +43,7 @@ public class StateArm implements Arm{
         }
     }
 
-    public void down(int sec) throws InterruptedException{
+    public void down(int sec) throws InterruptedException {
         Parts.piv1.setPower(-Parts.armPower);
         Parts.piv2.setPower(-Parts.armPower);
         Parts.slide.setPower(-Parts.armPower * Parts.armToExtend);
@@ -72,7 +72,7 @@ public class StateArm implements Arm{
         }
     }
 
-    public void extend(int sec) throws InterruptedException{
+    public void extend(int sec) throws InterruptedException {
         Parts.slide.setPower(-Parts.extendPower);
         Thread.sleep(sec);
         Parts.slide.setPower(0);
@@ -89,7 +89,7 @@ public class StateArm implements Arm{
         }
     }
 
-    public void retract(int sec) throws InterruptedException{
+    public void retract(int sec) throws InterruptedException {
         Parts.slide.setPower(Parts.extendPower);
         Thread.sleep(sec);
         Parts.slide.setPower(0);
@@ -104,16 +104,11 @@ public class StateArm implements Arm{
 
     /* setting the arm ticks */
     public void setArm(int ticks) {
-        Parts.inEncoderA = true;
 
-        Parts.setArm = ticks;
     }
 
     /* setting the slide ticks */
     public void setSlide(int ticks) {
-        Parts.inEncoderS = true;
-
-        Parts.setSlide = (int)(ticks + Parts.slideTicksZero);
 
     }
 
@@ -128,37 +123,13 @@ public class StateArm implements Arm{
 
     /* methods to start encoders */
     public void armGo() {
-        if (Parts.inEncoderA) {
-            Parts.piv1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            Parts.piv2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            Parts.piv1.setTargetPosition(Parts.setArm);
-            Parts.piv2.setTargetPosition(Parts.setArm);
-
-            Parts.piv1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Parts.piv2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            Parts.piv1.setPower(Parts.armPower);
-            Parts.piv2.setPower(Parts.armPower);
-            if (Parts.piv1.getCurrentPosition() > Parts.setArm - 1 || Parts.piv1.getCurrentPosition() < Parts.setArm + 1) {
-                Parts.inEncoderA = false;
-            }
-
-            Parts.piv1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            Parts.piv2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        }
 
     }
+
 
     public void slideGo() {
-        if (Parts.inEncoderS) {
-            Parts.slide.setTargetPosition(Parts.setSlide);
-            Parts.slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            Parts.slide.setPower(Parts.extendPower);
-            if (Parts.slide.getCurrentPosition() > Parts.setSlide - 1 || Parts.slide.getCurrentPosition() < Parts.setSlide + 1) {
-                Parts.inEncoderS = false;
-            }
-        }
+
     }
+
 }
