@@ -5,15 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "ArmPID", group = "PID")
-public class ArmPID extends LinearOpMode {
+@TeleOp(name = "ArmTuner", group = "Tuning")
+public class ArmTuner extends LinearOpMode {
 
-    // Declare the motor and PID coefficients
-
-
+    private double kP = Parts.kP;
+    private double kI = Parts.kI;
+    private double kD = Parts.kD;
     private double targetPosition = 0;
     private double integralSum = 0;
     private double lastError = 0;
@@ -22,32 +21,12 @@ public class ArmPID extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        // Reset and set the motor to run using the encoder
-        Parts.piv1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Parts.piv1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        Gamepad currentGamepad = new Gamepad();
-        Gamepad previousGamepad =  new Gamepad();
-
         // Wait for the start of the op mode
         waitForStart();
         timer.reset();
 
         // Main loop to control the motor using PID
         while (opModeIsActive()) {
-            previousGamepad.copy(currentGamepad);
-            currentGamepad.copy(gamepad1);
-            // Check if the gamepad button is pressed
-            if (currentGamepad.a && !previousGamepad.a) {
-                // Set the target position to 0
-                targetPosition = 0;
-            } else if (currentGamepad.b && !previousGamepad.b) {
-                // Set the target position to 90
-                targetPosition = 0.15 * Parts.pivTPR;
-            } else if (currentGamepad.x && !previousGamepad.x) {
-                // Set the target position to 180
-                targetPosition = 0.25  * Parts.pivTPR;
-            }
             // Get the current position of the motor
             double currentPosition = Parts.piv1.getCurrentPosition();
 
@@ -59,12 +38,11 @@ public class ArmPID extends LinearOpMode {
             double derivative = (error - lastError) / timer.seconds();
 
             // Calculate the output power using PID formula
-            double output = Parts.kP * error + Parts.kI * integralSum + Parts.kD * derivative;
+            double output = kP * error + kI * integralSum + kD * derivative;
 
             // Set the motor power
             Parts.piv1.setPower(output);
             Parts.piv2.setPower(output);
-            Parts.slide.setPower(output * Parts.armToExtend);
 
             // Update the last error and reset the timer
             lastError = error;
@@ -75,7 +53,36 @@ public class ArmPID extends LinearOpMode {
             telemetry.addData("Current Position", currentPosition);
             telemetry.addData("Error", error);
             telemetry.addData("Output", output);
+            telemetry.addData("kP", kP);
+            telemetry.addData("kI", kI);
+            telemetry.addData("kD", kD);
             telemetry.update();
+
+            // Adjust PID constants using gamepad buttons
+            if (gamepad1.dpad_up) {
+                kP += 0.001;
+            } else if (gamepad1.dpad_down) {
+                kP -= 0.001;
+            }
+
+            if (gamepad1.dpad_right) {
+                kI += 0.001;
+            } else if (gamepad1.dpad_left) {
+                kI -= 0.001;
+            }
+
+            if (gamepad1.y) {
+                kD += 0.001;
+            } else if (gamepad1.a) {
+                kD -= 0.001;
+            }
+
+            // Set target position using gamepad triggers
+            if (gamepad1.right_trigger > 0.1) {
+                targetPosition += 10;
+            } else if (gamepad1.left_trigger > 0.1) {
+                targetPosition -= 10;
+            }
         }
     }
 }

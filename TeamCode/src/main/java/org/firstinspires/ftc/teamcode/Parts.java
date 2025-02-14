@@ -28,10 +28,7 @@ public class Parts {
     public static double ticksPerRev = 5281.1;
     public static double pivTPR = 5 * ticksPerRev;
     public static double slideTPR = 2 * ticksPerRev;
-    public static int armLow = (int)(Parts.pivTPR * 0.00);
-    public static int armHigh = (int)(Parts.pivTPR * 0.25);
-    public static int slideHigh = (int)(Parts.slideTPR * 0.00);
-    public static int slideLow = -56000;
+
 
     public static int setArm = 0;
     public static int setSlide = 0;
@@ -42,7 +39,6 @@ public class Parts {
 
     public static boolean inEncoderS = false;
     public static boolean inEncoderA = false;
-    public static boolean lims = false;
 
     public static double armPower;
     public static double extendPower;
@@ -60,6 +56,13 @@ public class Parts {
     public static double integralSum = 0;
     public static ElapsedTime timer = new ElapsedTime();
     public static double lastError = 0;
+
+    // useless right now
+    public static int armLow;
+    public static int armHigh;
+    public static int slideHigh;
+    public static int slideLow;
+    public static boolean lims = false;
 
 
     public Parts(HardwareMap hardwareMap) {
