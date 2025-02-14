@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Parts;
 import org.firstinspires.ftc.teamcode.parts.BasicDrive;
 import org.firstinspires.ftc.teamcode.parts.GearClaw;
 import org.firstinspires.ftc.teamcode.parts.StateArm;
 
+@TeleOp(name = "State TeleOp", group = "TELEOP")
 public class StateTeleOp extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {

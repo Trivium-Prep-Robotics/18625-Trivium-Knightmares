@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Parts;
 
-@TeleOp(name = "PrintConstants", group = "Tuning")
+@TeleOp(name = "Print Constants", group = "Tuning")
 public class PrintConstants extends LinearOpMode {
 
     @Override

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Parts;
 
-@TeleOp(name = "ArmPID", group = "Tuning")
+@TeleOp(name = "Arm PID", group = "Tuning")
 public class ArmPID extends LinearOpMode {
 
     // Declare the motor and PID coefficients

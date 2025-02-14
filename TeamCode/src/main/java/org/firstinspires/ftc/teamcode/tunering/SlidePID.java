@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Parts;
 
-@TeleOp(name = "SlidePID", group = "Tuning")
+@TeleOp(name = "Slide PID", group = "Tuning")
 public class SlidePID extends LinearOpMode {
 
     // Declare the motor and PID coefficients

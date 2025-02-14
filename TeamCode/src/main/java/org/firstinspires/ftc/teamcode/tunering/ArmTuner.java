@@ -2,11 +2,12 @@ package org.firstinspires.ftc.teamcode.tunering;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Parts;
 
-@TeleOp(name = "ArmTuner", group = "Tuning")
+@TeleOp(name = "Arm Tuner", group = "Tuning")
 public class ArmTuner extends LinearOpMode {
 
     private double kP = Parts.kP;
@@ -20,12 +21,18 @@ public class ArmTuner extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        Gamepad currentGamepad = new Gamepad();
+        Gamepad previousGamepad =  new Gamepad();
+
         // Wait for the start of the op mode
         waitForStart();
         timer.reset();
 
         // Main loop to control the motor using PID
         while (opModeIsActive()) {
+            previousGamepad.copy(currentGamepad);
+            currentGamepad.copy(gamepad1);
+
             // Get the current position of the motor
             double currentPosition = Parts.piv1.getCurrentPosition();
 
@@ -59,21 +66,21 @@ public class ArmTuner extends LinearOpMode {
             telemetry.update();
 
             // Adjust PID constants using gamepad buttons
-            if (gamepad1.dpad_up) {
+            if (currentGamepad.dpad_up && !previousGamepad.dpad_up) {
                 kP += 0.001;
-            } else if (gamepad1.dpad_down) {
+            } else if (gamepad1.dpad_down && !previousGamepad.dpad_down) {
                 kP -= 0.001;
             }
 
-            if (gamepad1.dpad_right) {
+            if (currentGamepad.dpad_right && !previousGamepad.dpad_right) {
                 kI += 0.001;
-            } else if (gamepad1.dpad_left) {
+            } else if (currentGamepad.dpad_left && !previousGamepad.dpad_left) {
                 kI -= 0.001;
             }
 
-            if (gamepad1.y) {
+            if (currentGamepad.y && !previousGamepad.y) {
                 kD += 0.001;
-            } else if (gamepad1.a) {
+            } else if (currentGamepad.a && !previousGamepad.a) {
                 kD -= 0.001;
             }
 
