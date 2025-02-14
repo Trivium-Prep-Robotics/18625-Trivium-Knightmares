@@ -43,6 +43,7 @@ public class ArmTuner extends LinearOpMode {
             // Set the motor power
             Parts.piv1.setPower(output);
             Parts.piv2.setPower(output);
+            Parts.slide.setPower(output * Parts.armToExtend);
 
             // Update the last error and reset the timer
             lastError = error;
@@ -82,6 +83,12 @@ public class ArmTuner extends LinearOpMode {
                 targetPosition += 10;
             } else if (gamepad1.left_trigger > 0.1) {
                 targetPosition -= 10;
+            }
+
+            if (gamepad1.b) {
+                Parts.kP = kP;
+                Parts.kI = kI;
+                Parts.kD = kD;
             }
         }
     }

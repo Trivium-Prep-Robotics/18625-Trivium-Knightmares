@@ -40,8 +40,8 @@ public class Parts {
     public static boolean inEncoderS = false;
     public static boolean inEncoderA = false;
 
-    public static double armPower;
-    public static double extendPower;
+    public static double armPower = 1;
+    public static double extendPower = 1;
     public static double armToExtend = 0.1;
 
     public static double openClaw;

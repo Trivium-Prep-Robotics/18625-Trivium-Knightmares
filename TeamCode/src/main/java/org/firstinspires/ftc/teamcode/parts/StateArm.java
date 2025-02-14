@@ -20,13 +20,11 @@ public class StateArm implements Arm {
     /* up movement methods for the arm */
     public void up(boolean move) {
         if (move) {
-            Parts.piv1.setPower(Parts.armPower);
-            Parts.piv2.setPower(Parts.armPower);
-            Parts.slide.setPower(Parts.armPower * Parts.armToExtend);
+            Parts.setArm += 10;
         }
     }
 
-    public void up(int sec) throws InterruptedException {
+    public void up(int sec) throws InterruptedException { // TODO: when arm and slide are tuned this will need to change
         Parts.piv1.setPower(Parts.armPower);
         Parts.piv2.setPower(Parts.armPower);
         Parts.slide.setPower(Parts.armPower * Parts.armToExtend);
@@ -39,13 +37,11 @@ public class StateArm implements Arm {
     /* down movement methods for the arm */
     public void down(boolean move) {
         if (move) {
-            Parts.piv1.setPower(-Parts.armPower);
-            Parts.piv2.setPower(-Parts.armPower);
-            Parts.slide.setPower(-Parts.armPower * Parts.armToExtend);
+            Parts.setArm -= 10;
         }
     }
 
-    public void down(int sec) throws InterruptedException {
+    public void down(int sec) throws InterruptedException { // TODO: when arm and slide are tuned this will need to change
         Parts.piv1.setPower(-Parts.armPower);
         Parts.piv2.setPower(-Parts.armPower);
         Parts.slide.setPower(-Parts.armPower * Parts.armToExtend);
@@ -74,7 +70,7 @@ public class StateArm implements Arm {
         }
     }
 
-    public void extend(int sec) throws InterruptedException {
+    public void extend(int sec) throws InterruptedException { // TODO: when arm and slide are tuned this will need to change
         Parts.slide.setPower(-Parts.extendPower);
         Thread.sleep(sec);
         Parts.slide.setPower(0);
@@ -91,7 +87,7 @@ public class StateArm implements Arm {
         }
     }
 
-    public void retract(int sec) throws InterruptedException {
+    public void retract(int sec) throws InterruptedException { // TODO: when arm and slide are tuned this will need to change
         Parts.slide.setPower(Parts.extendPower);
         Thread.sleep(sec);
         Parts.slide.setPower(0);

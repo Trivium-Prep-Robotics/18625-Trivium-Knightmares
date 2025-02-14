@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "ArmPID", group = "PID")
+@TeleOp(name = "ArmPID", group = "Tuning")
 public class ArmPID extends LinearOpMode {
 
     // Declare the motor and PID coefficients
