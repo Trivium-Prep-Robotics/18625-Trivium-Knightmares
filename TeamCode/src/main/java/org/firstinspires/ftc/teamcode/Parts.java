@@ -57,6 +57,9 @@ public class Parts {
     public static ElapsedTime timer = new ElapsedTime();
     public static double lastError = 0;
 
+    public static double sP = 0.1;
+    public static double sI = 0.01;
+    public static double sD = 0.01;
     // useless right now
     public static int armLow;
     public static int armHigh;
