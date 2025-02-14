@@ -152,7 +152,31 @@ public class StateArm implements Arm {
 
 
     public void slideGo() {
+        // Get the current position of the motor
+        double currentPosition = Parts.slide.getCurrentPosition();
 
+        // Calculate the error between the target and current position
+        double error = Parts.setSlide - currentPosition;
+
+        // Calculate the integral sum and derivative
+        Parts.SintegralSum += error * Parts.timer.seconds();
+        double derivative = (error - Parts.SlastError) / Parts.timer.seconds();
+
+        // Calculate the output power using PID formula
+        double output = Parts.sP * error + Parts.sI * Parts.SintegralSum + Parts.sD * derivative;
+
+        // Set the motor power
+        Parts.slide.setPower(output);
+
+        // Update the last error and reset the timer
+        Parts.SlastError = error;
+        Parts.timer.reset();
+
+        // Send telemetry data to the driver station
+        telemetry.addData("Target Position", Parts.setSlide);
+        telemetry.addData("Current Position", currentPosition);
+        telemetry.addData("Error", error);
+        telemetry.addData("Output", output);
     }
 
 }

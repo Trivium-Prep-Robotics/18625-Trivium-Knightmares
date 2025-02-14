@@ -60,6 +60,8 @@ public class Parts {
     public static double sP = 0.1;
     public static double sI = 0.01;
     public static double sD = 0.01;
+    public static double SintegralSum = 0;
+    public static double SlastError = 0;
     // useless right now
     public static int armLow;
     public static int armHigh;

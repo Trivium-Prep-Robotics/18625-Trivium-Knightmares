@@ -16,11 +16,13 @@ public class PrintConstants extends LinearOpMode {
         while (opModeIsActive()) {
             // Print the constants
             telemetry.addData("Arm Power", Parts.armPower);
-            telemetry.addData("Extend Power", Parts.extendPower);
-            telemetry.addData("Arm To Extend", Parts.armToExtend);
             telemetry.addData("kP", Parts.kP);
             telemetry.addData("kI", Parts.kI);
             telemetry.addData("kD", Parts.kD);
+            telemetry.addData("Extend Power", Parts.extendPower);
+            telemetry.addData("kP", Parts.sP);
+            telemetry.addData("kI", Parts.sI);
+            telemetry.addData("kD", Parts.sD);
             telemetry.update();
         }
     }

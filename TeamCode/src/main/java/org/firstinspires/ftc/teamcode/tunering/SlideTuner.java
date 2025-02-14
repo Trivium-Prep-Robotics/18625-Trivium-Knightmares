@@ -27,7 +27,7 @@ public class SlideTuner extends LinearOpMode {
         // Main loop to control the motor using PID
         while (opModeIsActive()) {
             // Get the current position of the motor
-            double currentPosition = Parts.piv1.getCurrentPosition();
+            double currentPosition = Parts.slide.getCurrentPosition();
 
             // Calculate the error between the target and current position
             double error = targetPosition - currentPosition;
@@ -40,9 +40,7 @@ public class SlideTuner extends LinearOpMode {
             double output = sP * error + sI * integralSum + sD * derivative;
 
             // Set the motor power
-            Parts.piv1.setPower(output);
-            Parts.piv2.setPower(output);
-            Parts.slide.setPower(output * Parts.armToExtend);
+            Parts.slide.setPower(output);
 
             // Update the last error and reset the timer
             lastError = error;
